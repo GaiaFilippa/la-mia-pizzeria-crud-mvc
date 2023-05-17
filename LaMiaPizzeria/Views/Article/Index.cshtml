@@ -1,0 +1,47 @@
+﻿@model List<Pizza>
+
+
+    <main>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Menù</h3>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-12">
+
+                    <table class="table table-success table-striped mb-5">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Immagine</th>
+                                <th scope="col">Pizze</th>
+                                <th scope="col">Descrizione</th>
+                                <th scope="col">Prezzo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (Pizza pizze in Model)
+                            {
+                                <a href="@Url.Action("Details", "Article", new {id = pizze.Id})">
+                                <tr>
+                                    <th scope="row">@pizze.Id</th>
+                                    <td><img class="img-fluid img_square" src="@pizze.Image" width="200" alt="@pizze.Name"></td>
+                                    <td>@pizze.Name</td>
+                                    <td>@pizze.Description</td>
+                                    <td>@pizze.Price €</td>
+                                </tr>
+                                </a>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </main>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LaMiaPizzeria.Database;
+using LaMiaPizzeria.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LaMiaPizzeria.Controllers
 {
@@ -6,7 +8,11 @@ namespace LaMiaPizzeria.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            using (PizzaContext db = new PizzaContext())
+            {
+                List<Pizza> pizze = db.Pizze.ToList();
+                return View(pizze);
+            }
         }
     }
 }
