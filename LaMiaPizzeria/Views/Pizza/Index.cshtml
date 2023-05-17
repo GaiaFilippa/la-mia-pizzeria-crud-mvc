@@ -1,8 +1,6 @@
 ﻿@model List<Pizza>
 
 
-    <main>
-
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12">
@@ -24,18 +22,20 @@
                         </thead>
                         <tbody>
 
-                            @foreach (Pizza pizze in Model)
-                            {
-                                <a href="@Url.Action("Details", "Article", new {id = pizze.Id})">
-                                <tr>
-                                    <th scope="row">@pizze.Id</th>
-                                    <td><img class="img-fluid img_square" src="@pizze.Image" width="200" alt="@pizze.Name"></td>
-                                    <td>@pizze.Name</td>
-                                    <td>@pizze.Description</td>
-                                    <td>@pizze.Price €</td>
-                                </tr>
-                                </a>
-                            }
+                    @foreach(Pizza pizze in Model)
+                    {
+                        <tr>
+                            <th scope="row">@pizze.Id</th>
+                            <td><img class="img-fluid img_square" src="@pizze.Image" width="200" alt="@pizze.Name"></td>
+                            <td>@pizze.Name</td>
+                            <td>@pizze.Description</td>
+                            <td>@pizze.Price €</td>
+                        </tr>
+                       }
+
+                                
+                         
+                           
 
                         </tbody>
                     </table>
@@ -43,5 +43,3 @@
                 </div>
             </div>
         </div>
-
-    </main>
