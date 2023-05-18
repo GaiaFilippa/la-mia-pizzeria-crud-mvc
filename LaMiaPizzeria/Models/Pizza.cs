@@ -23,6 +23,7 @@ namespace LaMiaPizzeria.Models
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Il campo del prezzo è obbligatorio!")]
+        [Range(1, float.MaxValue)]
         public float Price { get; set; }
 
         public Pizza()
