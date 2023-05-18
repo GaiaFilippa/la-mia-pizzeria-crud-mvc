@@ -2,7 +2,7 @@
 @model ListPizzas
 
 
-@if (Model.ResultArticles.Count == 0)
+@if (Model.ResultPizza.Count == 0)
 {
     <h2>Non ho trovato articoli con la ricerca "@Model.SearchString"!</h2>
 }
@@ -10,7 +10,7 @@ else
 {
     <h2>Ho trovato i seguenti articoli con la ricerca "@Model.SearchString":</h2>
     <ol>
-        @foreach (Pizza pizza in Model.ResultArticles)
+        @foreach (Pizza pizza in Model.ResultPizza)
         {
             <li>@pizza.Name - @pizza.Description</li>
         }
