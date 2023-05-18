@@ -22,16 +22,16 @@
                         </thead>
                         <tbody>
 
-                    @foreach(Pizza pizze in Model)
-                    {
-                        <tr>
-                            <th scope="row">@pizze.Id</th>
-                            <td><img class="img-fluid img_square" src="@pizze.Image" width="200" alt="@pizze.Name"></td>
-                            <td>@pizze.Name</td>
-                            <td>@pizze.Description</td>
-                            <td>@pizze.Price €</td>
-                        </tr>
-                       }
+                            @foreach(Pizza pizze in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@pizze.Id</th>
+                                    <td><img class="img-fluid img_square" src="@pizze.Image" width="200" alt="@pizze.Name"></td>
+                                    <td>@pizze.Name</td>
+                                    <td>@pizze.Description</td>
+                                    <td>@pizze.Price €</td>
+                                </tr>
+                            }
 
                                 
                          
