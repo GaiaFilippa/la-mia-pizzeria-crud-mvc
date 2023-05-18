@@ -9,16 +9,26 @@ namespace LaMiaPizzeria.Models
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Il campo del nome è obbligatorio!")]
+        [StringLength(50, ErrorMessage = "Il campo del nome può riportare al massimo 50 caratteri.")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Il campo della descrizione è obbligatorio!")]
         [Column(TypeName = "text")]
         public string Description { get; set; }
 
-        [MaxLength(300)]
+        [Required(ErrorMessage = "Il campo URL dell'immagine è obbligatorio!")]
+        [Url(ErrorMessage = "L'URL inserito non è un URL valido!")]
+        [StringLength(300, ErrorMessage = "Il campo URL dell'immagine può contenere al massimo 300 caratteri")]
         public string Image { get; set; }
 
+        [Required(ErrorMessage = "Il campo del prezzo è obbligatorio!")]
         public float Price { get; set; }
+
+        public Pizza()
+        {
+
+        }
 
         public Pizza(string name, string description, string image, float price)
         {
