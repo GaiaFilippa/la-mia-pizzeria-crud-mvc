@@ -118,6 +118,31 @@ namespace LaMiaPizzeria.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            using (PizzaContext db = new PizzaContext())
+            {
+                Pizza? pizzaToDelete = db.Pizze.Where(article => article.Id == id).FirstOrDefault();
+
+                if (pizzaToDelete != null)
+                {
+                    db.Remove(pizzaToDelete);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    return NotFound("Non ho trovato l'articolo da eliminare!");
+
+                }
+            }
+        }
+
+
 
     }
 }
