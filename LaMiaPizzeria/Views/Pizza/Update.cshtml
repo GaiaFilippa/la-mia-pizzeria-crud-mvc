@@ -1,8 +1,8 @@
 ﻿@model Pizza
 
-<div class="container">
-    <h2 class="mb-3">Aggiungi una pizza!</h2>
-    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Id" method="post">
+<div class="container text-bg-light mt-5">
+    <h2 class="mb-3 p-5">Modifica una pizza!</h2>
+    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Id" method="post" class="p-5">
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label asp-for="Id" class="form-label">Id Articolo</label>
@@ -28,6 +28,6 @@
             <input asp-for="Price" type="text" class="form-control" required>
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-success">Invia</button>
+        <button type="submit" class="btn btn-success">Salva</button>
     </form>
 </div>
