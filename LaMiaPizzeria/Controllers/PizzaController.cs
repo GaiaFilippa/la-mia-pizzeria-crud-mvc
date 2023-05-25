@@ -1,5 +1,6 @@
 ﻿using LaMiaPizzeria.Database;
 using LaMiaPizzeria.Models;
+using LaMiaPizzeria.Models.ModelForViews;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,23 +25,36 @@ namespace LaMiaPizzeria.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            using (PizzaContext db = new PizzaContext())
+            {
+                List<PizzaCategory> pizzaCategories = db.PizzaCategories.ToList();
+
+                PizzaListCategory modelForView = new PizzaListCategory();
+                modelForView.Pizza = new Pizza();
+                modelForView.PizzaCategories = pizzaCategories;
+                return View("Create", modelForView);
+            }
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult Create(Pizza newPizza)
+        public IActionResult Create(PizzaListCategory data)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Create", newPizza);
+            using(PizzaContext db = new PizzaContext()) {
+                if (!ModelState.IsValid)
+                {
+                    List<PizzaCategory> pizzaCategories = db.PizzaCategories.ToList();
+                    data.PizzaCategories = pizzaCategories;
+
+                    return View("Create", data);
+                }
             }
 
             using (PizzaContext db = new PizzaContext())
             {
-                db.Pizze.Add(newPizza);
+                db.Pizze.Add(data.Pizza);
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
