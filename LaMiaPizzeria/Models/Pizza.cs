@@ -26,7 +26,10 @@ namespace LaMiaPizzeria.Models
         [Range(1, float.MaxValue)]
         public float Price { get; set; }
 
-        public Pizza()
+		public int? PizzaCategoryId { get; set; }
+		public PizzaCategory? Category { get; set; }
+
+		public Pizza()
         {
 
         }

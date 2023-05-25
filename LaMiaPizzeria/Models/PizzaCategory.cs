@@ -6,7 +6,7 @@
 		public string Name { get; set; }
 		public string? Description { get; set; }
 
-		// Ricorda la lista
+		public List<Pizza> Pizze { get; set; }
 
 		public PizzaCategory()
 		{
@@ -17,6 +17,7 @@
 		{
 			Name = name;
 			Description = description;
+			Pizze = new List<Pizza>();
 		}
 
 	}
