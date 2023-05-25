@@ -90,16 +90,20 @@ namespace LaMiaPizzeria.Controllers
         {
             using (PizzaContext db = new PizzaContext())
             {
-                Pizza? pizzaToModify = db.Pizze.Where(article => article.Id == id).FirstOrDefault();
+                Pizza? pizzaToModify = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
 
-                if (pizzaToModify != null)
+                if (pizzaToModify == null)
                 {
-                    return View("Update", pizzaToModify);
+                    return NotFound("La pizza che stai cercando non è stata trovata...");
                 }
                 else
                 {
+                    List<PizzaCategory> pizzeCategory = db.PizzaCategories.ToList();
 
-                    return NotFound("L'articolo che vorresti modificare è inesistente!");
+                    PizzaListCategory modelView = new PizzaListCategory();
+                    modelView.Pizza = pizzaToModify;
+                    modelView.PizzaCategories = pizzeCategory;
+                    return View(modelView);
                 }
             }
 
@@ -109,32 +113,41 @@ namespace LaMiaPizzeria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult Update(int id, Pizza modifiedArticle)
+        public IActionResult Update(int id, PizzaListCategory data)
         {
             if (!ModelState.IsValid)
             {
-                return View("Update", modifiedArticle);
-            }
-
-            using (PizzaContext db = new PizzaContext())
-            {
-                Pizza? articleToModify = db.Pizze.Where(article => article.Id == id).FirstOrDefault();
-
-                if (articleToModify != null)
+                using (PizzaContext db = new PizzaContext())
                 {
+                    List<PizzaCategory> pizzaCategories = db.PizzaCategories.ToList();
+                    data.PizzaCategories = pizzaCategories;
 
-                    articleToModify.Name = modifiedArticle.Name;
-                    articleToModify.Description = modifiedArticle.Description;
-                    articleToModify.Image = modifiedArticle.Image;
-                    articleToModify.Price = modifiedArticle.Price;
-
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-
+                    return View("Update", data);
                 }
-                else
+            }
+            else
+            {
+
+                using (PizzaContext db = new PizzaContext())
                 {
-                    return NotFound("L'articolo che vorresti modificare è inesistente!");
+                    Pizza? pizzaToModify = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
+
+                    if (pizzaToModify == null)
+                    {
+                        return NotFound("La pizza che stai cercando non è stata trovata...!");
+
+                    }
+                    else
+                    {
+                        pizzaToModify.Name = data.Pizza.Name;
+                        pizzaToModify.Description = data.Pizza.Description;
+                        pizzaToModify.Image = data.Pizza.Image;
+                        pizzaToModify.Price = data.Pizza.Price;
+                        pizzaToModify.PizzaCategoryId = data.Pizza.PizzaCategoryId;
+
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
 
