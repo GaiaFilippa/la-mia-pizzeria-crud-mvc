@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace LaMiaPizzeria.Controllers
 {
     [Authorize]
@@ -53,6 +54,7 @@ namespace LaMiaPizzeria.Controllers
         {
             using (PizzaContext db = new PizzaContext())
             {
+              
                 Pizza? pizzaDetails = db.Pizze.Where(pizze => pizze.Id == id).Include(pizze => pizze.Category).FirstOrDefault();
 
                 if (pizzaDetails != null)

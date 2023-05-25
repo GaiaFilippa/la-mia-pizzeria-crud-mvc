@@ -8,7 +8,7 @@
 
 		public List<Pizza> Pizze { get; set; }
 
-		public PizzaCategory()
+		public PizzaCategory ()
 		{
 
 		}

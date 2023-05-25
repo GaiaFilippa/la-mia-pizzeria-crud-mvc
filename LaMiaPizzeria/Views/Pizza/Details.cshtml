@@ -16,15 +16,16 @@
                 <strong>Prezzo:</strong>
                 @Model.Price
             </p>
-            <strong>Categoria:</strong>
-            @if (Model.Category != null)
-            {
-                @Model.Category.Name
-            }
-            else
-            {
-                <span>Nessuna categoria è stata ancora associata.</span>
-            }
+            <p>
+                <strong>Categoria:</strong>
+                @if (Model.Category != null)
+                {
+                    @Model.Category.Name
+                }
+                else
+                {
+                    <span>Nessuna categoria è stata ancora associata.</span>
+                }
             </p>
         </div>
     </div>
